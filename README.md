@@ -27,7 +27,7 @@ O objetivo é criar uma interface interativa para gerenciar as jogadoras, mostra
 ## 🌐 Publicação
 
 O site está publicado no **Github Pages**:  
-🔗 [Acesse o site aqui](https://seu-usuario.github.io/cp1-webdev-crud)
+🔗 [Acesse o site aqui](https://luararamos.github.io/women-soccer-players/)
 
 
 
@@ -44,3 +44,4 @@ O site está publicado no **Github Pages**:
 
 - Todos os dados são armazenados no **LocalStorage** do navegador.  
 - Esta aplicação é uma entrega acadêmica para a disciplina de **Web Development** da FIAP.
+
