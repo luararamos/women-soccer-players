@@ -1,0 +1,178 @@
+/* ====== Tema & Reset Leve ====== */
+:root{
+  --bg-1:#001533;
+  --bg-2:#002b80;
+  --card-glass: rgba(255,255,255,.12);
+  --card-glass-strong: rgba(255,255,255,.18);
+  --text:#ffffff;
+  --accent:#4da6ff;
+  --accent-2:#00d4ff;
+  --btn:#0044cc;
+  --btn-hover:#235cff;
+  --danger:#ff3b3b;
+  --gold:#ffd166;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  margin: 0;
+  padding: 24px;
+  background: var(--bg-1);
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ====== Título ====== */
+h1{
+  text-align:center;
+  margin: 0 0 24px;
+  letter-spacing:.5px;
+  font-weight:800;
+  text-shadow: 0 4px 18px rgba(0,0,0,.4);
+}
+
+/* ====== Form ====== */
+.form-container {
+  max-width: 500px;         
+  margin: 0 auto 32px auto;
+  background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.06));
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+
+.form-container input{
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+
+.form-container input::placeholder{color: rgba(255,255,255,.7)}
+.form-container input:focus{
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 4px rgba(0,212,255,.15);
+  background: rgba(255,255,255,.12);
+}
+
+.form-container button{
+  width:100%;
+  padding: 12px 14px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--btn), var(--btn-hover));
+  color: #fff;
+  font-weight: 700;
+  letter-spacing:.3px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(35,92,255,.35);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.form-container button:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+.form-container button:active{ transform: translateY(0); box-shadow: 0 4px 12px rgba(35,92,255,.35); }
+
+/* ====== Grid de Cards ====== */
+.card-grid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 50px;
+  align-items: stretch;
+}
+
+/* ====== Card ====== */
+.card{
+  position: relative;
+  width: 120%;
+  height: 420px;
+  background: url("../assets/images/card-fifa-bg.png") center / cover no-repeat;
+  color: var(--text);
+  text-align:center;
+  padding: 20px 12px;
+  font-weight: 700;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.card:hover{
+  transform: translateY(-6px);
+}
+
+/* ====== Conteúdo do Card ====== */
+.card img{
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  margin-top: 12px;
+  border: 3px solid rgba(255,255,255,.75);
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
+}
+
+.card h3{
+  margin: 10px 0 6px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-shadow: 0 3px 10px rgba(0,0,0,.45);
+}
+
+.card p{
+  margin: 0 0 6px;
+  font-weight: 600;
+  color: #e6f0ff;
+}
+
+/* estatísticas em “chips” verticais */
+.stats{
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+  background: var(--card-glass-strong);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 12px;
+  padding: 10px 8px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+/* ====== Favorito ====== */
+.favorite{
+  position:absolute;
+  top:10px; right:10px;
+  font-size: 22px;
+  cursor: pointer;
+  user-select: none;
+  color: #fff;
+  text-shadow: 0 4px 14px rgba(0,0,0,.5);
+  transition: transform .15s ease, color .2s ease, filter .2s ease;
+}
+.favorite:hover{ transform: scale(1.08); filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); }
+.favorite.active{ color: var(--gold); }
+
+/* ====== Botões dentro do card (Editar/Remover) ====== */
+.card button{
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s ease, transform .15s ease;
+}
+
+.card button:hover{ background: rgba(255,255,255,.22); transform: translateY(-1px); }
+.card button + button{ margin-left: 8px; }
+.card button:last-child:hover{ background: rgba(255,59,59,.22); }
