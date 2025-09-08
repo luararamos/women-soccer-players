@@ -176,3 +176,69 @@ h1{
 .card button:hover{ background: rgba(255,255,255,.22); transform: translateY(-1px); }
 .card button + button{ margin-left: 8px; }
 .card button:last-child:hover{ background: rgba(255,59,59,.22); }
+
+/* --- Barra de controles (busca, filtro, ordenação) --- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px auto;
+  justify-content: center;
+  max-width: 800px;
+}
+
+.toolbar input[type="search"],
+.toolbar select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  min-width: 200px;
+  backdrop-filter: blur(4px);
+  transition: border-color .2s, background .2s;
+}
+
+.toolbar select option {
+  background: rgba(255, 255, 255, 0.1);
+  color: #000; 
+}
+
+.toolbar select {
+  -moz-appearance: none;
+}
+
+.toolbar input::placeholder {
+  color: rgba(255,255,255,.7);
+}
+
+.toolbar input[type="search"]:focus,
+.toolbar select:focus {
+  border-color: #00d4ff;
+  background: rgba(255,255,255,.18);
+}
+
+.toolbar button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0044cc, #235cff);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+.toolbar button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.toolbar button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}

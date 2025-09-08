@@ -1,5 +1,8 @@
 // --- Estado simples ---
 let editId = null;
+let filtroBusca = "";
+let filtroClube = "Todos";
+let ordenacao = null; // "nome" | "posicao"
 
 // --- LocalStorage helpers ---
 const lsGetAll = () => JSON.parse(localStorage.getItem(LS_KEY) || "[]");
@@ -72,7 +75,24 @@ const setFormData = (j) => {
 
 // --- Render  ---
 function render() {
-  const lista = lsGetAll();
+  let lista = lsGetAll();
+
+  if (filtroBusca) {
+    const q = filtroBusca.toLowerCase();
+    lista = lista.filter(j => j.nome.toLowerCase().includes(q) || j.posicao.toLowerCase().includes(q));
+  }
+
+
+  if (filtroClube !== "Todos") {
+    lista = lista.filter(j => j.clube === filtroClube);
+  }
+
+  if (ordenacao === "nome") {
+    lista.sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
+  } else if (ordenacao === "posicao") {
+    lista.sort((a, b) => a.posicao.localeCompare(b.posicao, "pt-BR"));
+  }
+
   grid.innerHTML = "";
 
   lista.forEach(item => {
@@ -143,4 +163,64 @@ btn.addEventListener("click", () => {
 
 // --- Init ---
 seedIfEmpty();
+criarControles();
 render();
+
+function criarControles() {
+  const container = document.createElement("div");
+  container.style.display = "flex";
+  container.style.gap = "10px";
+  container.style.flexWrap = "wrap";
+  container.style.margin = "20px 0";
+  container.className = "toolbar";
+
+  // input de busca
+  const inputBusca = document.createElement("input");
+  inputBusca.type = "search";
+  inputBusca.placeholder = "Buscar por nome ou posição";
+  inputBusca.addEventListener("input", e => {
+    filtroBusca = e.target.value;
+    render();
+  });
+
+  // select de clubes
+  const selectClube = document.createElement("select");
+  const optTodos = document.createElement("option");
+  optTodos.value = "Todos";
+  optTodos.textContent = "Todos os clubes";
+  selectClube.appendChild(optTodos);
+  // popula com clubes únicos
+  const clubes = [...new Set(lsGetAll().map(j => j.clube))];
+  clubes.forEach(c => {
+    const o = document.createElement("option");
+    o.value = c;
+    o.textContent = c;
+    selectClube.appendChild(o);
+  });
+  selectClube.addEventListener("change", e => {
+    filtroClube = e.target.value;
+    render();
+  });
+
+  // botões de ordenação
+  const btnNome = document.createElement("button");
+  btnNome.textContent = "Ordenar por Nome";
+  btnNome.onclick = () => { ordenacao = "nome"; render(); };
+
+  const btnPos = document.createElement("button");
+  btnPos.textContent = "Ordenar por Posição";
+  btnPos.onclick = () => { ordenacao = "posicao"; render(); };
+
+  const btnLimpar = document.createElement("button");
+  btnLimpar.textContent = "Limpar Ordenação";
+  btnLimpar.onclick = () => { ordenacao = null; render(); };
+
+  container.appendChild(inputBusca);
+  container.appendChild(selectClube);
+  container.appendChild(btnNome);
+  container.appendChild(btnPos);
+  container.appendChild(btnLimpar);
+
+  // insere antes da grid
+  grid.parentNode.insertBefore(container, grid);
+}
